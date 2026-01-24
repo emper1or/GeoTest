@@ -4,18 +4,34 @@ export interface Coordinate {
   lng: number;
 }
 
+export type GeoCategory = 
+  | 'ISLANDS' 
+  | 'PENINSULAS' 
+  | 'STRAITS' 
+  | 'GULFS' 
+  | 'SEAS' 
+  | 'LAKES' 
+  | 'RIVERS' 
+  | 'PLAINS' 
+  | 'HIGHLANDS' 
+  | 'MOUNTAINS'
+  | 'RECORDS'
+  | 'EXTREME_POINTS';
+
 export interface GeoLocation {
   id: number;
+  block: 1 | 2; // 1: General Geography, 2: Records & Extremes
   question: string;
   answer: string;
   lat: number;
   lng: number;
   toleranceKm: number;
-  polyPoints?: [number, number][]; // Array of [lat, lng] for rivers/ranges
+  category: GeoCategory;
+  polyPoints?: [number, number][]; 
 }
 
 export type QuizMode = 'TEST' | 'TRAINING';
-export type QuizState = 'START' | 'PLAYING' | 'FEEDBACK' | 'FINISHED';
+export type QuizState = 'START' | 'EXAM_SELECT' | 'TRAINING_SELECT' | 'PLAYING' | 'FEEDBACK' | 'FINISHED';
 
 export interface UserAnswer {
   question: GeoLocation;
@@ -23,4 +39,11 @@ export interface UserAnswer {
   clickedLng: number;
   distance: number;
   isCorrect: boolean;
+}
+
+export interface ExamMap {
+  id: number;
+  title: string;
+  description: string;
+  color: string;
 }
