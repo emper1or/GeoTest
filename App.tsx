@@ -105,7 +105,6 @@ const App: React.FC = () => {
             <div className="max-w-4xl mx-auto space-y-8 mt-6">
               <div className="text-center">
                 <h2 className="text-3xl font-black text-gray-900 leading-tight">Цифровая проверка карты</h2>
-                <p className="text-gray-500 mt-3 text-lg">Выберите формат работы для ваших учеников</p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -118,7 +117,7 @@ const App: React.FC = () => {
                   </div>
                   <h3 className="text-2xl font-bold text-gray-800">Принять зачет</h3>
                   <p className="text-sm text-gray-400 mt-3 leading-relaxed">
-                    Контрольная работа по одному из двух изолированных блоков. С оценкой и фиксированным числом вопросов.
+                    Контрольная работа. С оценкой и фиксированным числом вопросов.
                   </p>
                 </button>
 
@@ -131,19 +130,9 @@ const App: React.FC = () => {
                   </div>
                   <h3 className="text-2xl font-bold text-gray-800">Тренировка</h3>
                   <p className="text-sm text-gray-400 mt-3 leading-relaxed">
-                    Свободное изучение карты. Подсказки с ответами и визуализация русла рек для лучшего запоминания.
+                    Свободное изучение карты.
                   </p>
                 </button>
-              </div>
-
-              <div className="bg-amber-50 border border-amber-100 p-6 rounded-3xl flex gap-5 items-start">
-                <GraduationCap className="w-10 h-10 text-amber-600 shrink-0" />
-                <div className="text-amber-800">
-                  <h4 className="font-bold text-lg">Совет учителю</h4>
-                  <p className="text-sm leading-relaxed mt-1 opacity-90">
-                    Первый и второй блоки — это разные наборы данных. Вы можете поставить одну оценку за знание объектов, а вторую — за знание рекордов и крайних точек. Они не перемешиваются.
-                  </p>
-                </div>
               </div>
             </div>
           </div>
@@ -163,10 +152,7 @@ const App: React.FC = () => {
                     onClick={() => startExam(exam)}
                     className={`bg-white p-8 rounded-3xl shadow-sm border-l-8 cursor-pointer transition-all hover:shadow-xl hover:translate-y-[-4px] active:scale-95 ${exam.id === 1 ? 'border-blue-500' : 'border-emerald-500'}`}
                   >
-                    <div className="flex justify-between items-start mb-4">
-                      <Star className={`w-8 h-8 ${exam.id === 1 ? 'text-blue-500' : 'text-emerald-500'}`} />
-                      <span className="text-[10px] bg-gray-50 text-gray-400 px-2 py-1 rounded-full font-bold uppercase tracking-widest">Exam {exam.id}</span>
-                    </div>
+                    
                     <h3 className="text-xl font-black text-gray-800 mb-2">{exam.title}</h3>
                     <p className="text-sm text-gray-500 leading-relaxed">{exam.description}</p>
                   </div>

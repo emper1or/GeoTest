@@ -59,8 +59,8 @@ const MapComponent: React.FC<MapProps> = ({ currentQuestion, onAnswer, lastAnswe
     });
   }, [currentQuestion, onAnswer]);
 
-  // Show river path even before answering in training mode, or after answering in test
-  const showPolyline = (isFeedbackMode && currentQuestion.polyPoints) || (currentQuestion.category === 'RIVERS' && currentQuestion.polyPoints);
+  // CRITICAL: Only show polyline/path AFTER answer is given (feedback mode)
+  const showPolyline = isFeedbackMode && currentQuestion.polyPoints;
 
   return (
     <div className="w-full h-full relative border-2 sm:border-4 border-gray-800 rounded-lg overflow-hidden shadow-lg bg-[#f2efe9]">
@@ -81,15 +81,15 @@ const MapComponent: React.FC<MapProps> = ({ currentQuestion, onAnswer, lastAnswe
         
         <ClickHandler onClick={handleClick} disabled={isFeedbackMode} />
 
-        {/* River/Path Visualization */}
+        {/* River/Path/Range Visualization - Only appears during feedback */}
         {showPolyline && currentQuestion.polyPoints && (
           <Polyline 
             positions={currentQuestion.polyPoints}
             pathOptions={{ 
-              color: currentQuestion.category === 'RIVERS' ? '#3b82f6' : '#ef4444', 
-              weight: 5, 
-              opacity: isFeedbackMode ? 0.6 : 0.4,
-              dashArray: isFeedbackMode ? undefined : '5, 10' 
+              color: currentQuestion.category === 'RIVERS' ? '#3b82f6' : '#6b7280', 
+              weight: 6, 
+              opacity: 0.7,
+              dashArray: '10, 10' 
             }}
           />
         )}
@@ -128,12 +128,12 @@ const MapComponent: React.FC<MapProps> = ({ currentQuestion, onAnswer, lastAnswe
           </div>
           <div className="flex items-center gap-1.5 mb-0.5">
               <span className="w-2 h-2 bg-red-500 rounded-full"></span>
-              <span>Объект</span>
+              <span>Объект (центр)</span>
           </div>
-          {currentQuestion.category === 'RIVERS' && (
+          {isFeedbackMode && currentQuestion.polyPoints && (
             <div className="flex items-center gap-1.5 mb-0.5 border-t pt-1 mt-1 border-gray-100">
-                <span className="w-4 h-0.5 bg-blue-400"></span>
-                <span>Течение реки</span>
+                <span className="w-4 h-0.5 bg-gray-400 border-dashed border-b border-gray-600"></span>
+                <span>Протяженность</span>
             </div>
           )}
       </div>
